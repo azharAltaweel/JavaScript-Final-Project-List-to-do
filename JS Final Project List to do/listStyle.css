@@ -1,13 +1,28 @@
+/* Center content */
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     margin: 0;
+    background-color: rgb(96, 219, 105);
+    padding: 2vw;
 }
 
+.container {
+    background: white;
+    padding: 5%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Form styling */
 form {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;  
     justify-content: center;
     gap: 10px;
     margin-bottom: 20px;
@@ -15,18 +30,33 @@ form {
 
 form input {
     padding: 10px;
-    width: 100%;
-    max-width: 300px;
+    flex: 1;              
+    min-width: 150px;
     box-sizing: border-box;
+    border-radius: 40px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
 }
 
 form button {
-    padding: 10px;
+    padding: 10px 20px;                 
+    border-radius: 30px;                 
+    border: none;
+    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+    color: white;
+    font-size: 1rem;
     cursor: pointer;
-    width: 100%;
-    max-width: 100px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
 }
 
+form button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    background: linear-gradient(135deg, #66BB6A, #388E3C);
+}
+
+/* Task list */
 ul {
     list-style-type: none;
     padding: 0;
@@ -38,12 +68,12 @@ li {
     padding: 10px;
     margin: 5px auto;
     width: 100%;
-    max-width:100% ;
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    flex-wrap: wrap;  /* allow wrapping if screen is small */
 }
 
 .completed span {
@@ -51,16 +81,36 @@ li {
     color: gray;
 }
 
+/* Delete button as icon */
 .delete-btn {
-    background: red;
-    color: white;
+    background: none;
     border: none;
     cursor: pointer;
-    padding: 5px 10px;
-    border-radius: 4px;
+    padding: 5px;
+    color: red;
+    font-size: 1.2rem;
 }
 
+/* Counters */
+.counter {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+/* Small screen adjustments */
 @media (max-width: 500px) {
+    body {
+        height: auto;
+        padding: 20px;
+        align-items: flex-start;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
     li {
         flex-direction: column;
         align-items: flex-start;
@@ -68,5 +118,18 @@ li {
 
     .delete-btn {
         align-self: flex-end;
+    }
+
+    form input {
+        width: 70%;        /* input takes 70% of row */
+        padding: 8px;      /* smaller padding */
+        font-size: 0.9rem;
+    }
+
+    form button {
+        width: 30%;        /* button takes remaining space */
+        height: 40px;      /* smaller height */
+        font-size: 0.9rem; 
+        padding: 8px 16px;
     }
 }
