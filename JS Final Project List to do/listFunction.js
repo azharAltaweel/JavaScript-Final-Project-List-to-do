@@ -3,17 +3,18 @@ function addTask() {
     const task = taskInput.value;
 
     if (task !== "") {
-        const li = document.createElement("li");
+        const item = document.createElement("li");
 
         //  Checkbox
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
         checkbox.onchange = () => {
             if (checkbox.checked) {
-                li.classList.add("completed");
+                item.classList.add("completed");
             } else {
-                li.classList.remove("completed");
+                item.classList.remove("completed");
             }
+            updateCounter();// afterr change on checkbox
         };
 
         //  Task text
@@ -22,23 +23,35 @@ function addTask() {
 
         //  Delete button
         const deleteBtn = document.createElement("button");
-        deleteBtn.textContent = "Delete";
+        deleteBtn.innerHTML = '<i class="bi bi-trash3"></i>';
         deleteBtn.classList.add("delete-btn");
         deleteBtn.onclick = () => {
-            li.remove();
+            item.remove();
+            updateCounter();//afterr delete task
+
         };
 
-        //  Add elements to li
-        li.appendChild(checkbox);
-        li.appendChild(span);
-        li.appendChild(deleteBtn);
+        //  Add elements to list
+        item.appendChild(checkbox);
+        item.appendChild(span);
+        item.appendChild(deleteBtn);
 
-        document.getElementById("taskContainer").appendChild(li);
+        document.getElementById("taskContainer").appendChild(item);
 
         taskInput.value = ""; // clear input
+
+          updateCounter();//afterrr click on add button
+
     }
 }
+ function updateCounter(){
+    const allTasks= document.querySelectorAll("#taskContainer li");
+    const completedTasks=document.querySelectorAll("#taskContainer li.completed");
+ 
+    document.getElementById("completedCount").textContent = completedTasks.length;
+    document.getElementById("uncompletedCount").textContent = allTasks.length - completedTasks.length;
 
+ }
 
 
 
